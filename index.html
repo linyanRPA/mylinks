@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林焱的软件工坊</title>
+    <style>
+        :root {
+            /* 配色方案：你可以自己改这里的颜色 */
+            --bg-color: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --primary-color: #007bff; /* 下载按钮颜色 */
+            --secondary-color: #e9ecef; /* 教程按钮背景 */
+            --secondary-text: #495057; /* 教程按钮文字 */
+        }
+
+        /* 基础重置 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 容器限制宽度，保证大屏不散乱 */
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* 头部个人信息 */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .bio {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* 社交/联系链接区 */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.9rem;
+            background: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+            color: var(--primary-color);
+        }
+
+        /* 软件列表卡片区 */
+        .app-list {
+            display: grid;
+            /* 关键：响应式布局 */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .app-icon {
+            font-size: 2rem;
+            margin-right: 12px;
+        }
+
+        .app-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .app-ver {
+            font-size: 0.75rem;
+            background: #eef2ff;
+            color: #4f46e5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .app-desc {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* 按钮组 */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1; /* 让两个按钮等宽 */
+            padding: 10px 0;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        .btn-tutorial {
+            background-color: var(--secondary-color);
+            color: var(--secondary-text);
+        }
+
+        .btn-download {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 600px) {
+            body { padding: 15px; }
+            .name { font-size: 1.3rem; }
+            /* 手机上强制单列，防止挤压 */
+            .app-list { grid-template-columns: 1fr; } 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <img src="https://ui-avatars.com/api/?name=Lin+Yan&background=0D8ABC&color=fff&size=200" alt="头像" class="avatar">
+        
+        <h1 class="name">林焱</h1>
+        <p class="bio">独立开发者 | 专注电商自动化与财务工具<br>让跨境电商更高效，让数据更清晰。</p>
+        
+        <div class="social-links">
+            <a href="mailto:your_email@gmail.com">📧 发邮件</a>
+            <a href="#">💬 微信: LinYanDev</a>
+            <a href="https://github.com/yourname" target="_blank">🐙 GitHub</a>
+        </div>
+    </header>
+
+    <div class="app-list">
+
+        <div class="card">
+            <div class="card-top">
+                <span class="app-icon">🖼️</span>
+                <h3 class="app-title">Image Translator Pro <span class="app-ver">v5.0.9</span></h3>
+            </div>
+            <p class="app-desc">专为跨境电商打造。支持批量图片翻译、样式回填，无需PS即可快速生成多语言主图。</p>
+            <div class="btn-group">
+                <a href="https://你的教程链接.com/doc1" target="_blank" class="btn btn-tutorial">📖 查看教程</a>
+                <a href="https://pan.baidu.com/..." target="_blank" class="btn btn-download">⬇️ 下载软件</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <span class="app-icon">📊</span>
+                <h3 class="app-title">电商财务对账助手 <span class="app-ver">v2.1</span></h3>
+            </div>
+            <p class="app-desc">自动化合并多平台报表，一键计算利润与ROI，财务数据一目了然。</p>
+            <div class="btn-group">
+                <a href="https://你的教程链接.com/doc2" target="_blank" class="btn btn-tutorial">📖 查看教程</a>
+                <a href="https://pan.baidu.com/..." target="_blank" class="btn btn-download">⬇️ 下载软件</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <span class="app-icon">🏷️</span>
+                <h3 class="app-title">SKU 命名生成器 <span class="app-ver">v1.0</span></h3>
+            </div>
+            <p class="app-desc">基于图片识别自动生成规范的 SKU 编码，帮助你标准化产品库管理。</p>
+            <div class="btn-group">
+                <a href="#" class="btn btn-tutorial">📖 查看教程</a>
+                <a href="#" class="btn btn-download">⬇️ 下载工具</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px; color: #999; font-size: 0.8rem;">
+        <p>© 2026 林焱的软件工坊 | All Rights Reserved</p>
+    </footer>
+</div>
+
+</body>
+</html>
