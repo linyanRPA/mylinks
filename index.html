@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>我是林焱 | 电商提效专家</title>
+    <title>林焱 | 电商财务自动化专家</title>
     <style>
         :root {
             --bg-color: #f3f4f6;
@@ -11,6 +11,9 @@
             --text-sub: #4338ca;
             --btn-gradient: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
             --btn-shadow: 0 10px 20px -5px rgba(234, 88, 12, 0.4);
+            /* 抖音黑 */
+            --douyin-bg: #111111;
+            --douyin-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -29,12 +32,9 @@
         /* --- 弥散极光背景 --- */
         .aurora-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #ffffff; }
         .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.7; animation: float 20s infinite alternate ease-in-out; }
-        
-        /* 电脑端光球 */
         .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, #fbbf24 0%, #fed7aa 70%, transparent 100%); animation-duration: 25s; }
         .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, #a5b4fc 0%, #e0e7ff 70%, transparent 100%); animation-duration: 20s; animation-delay: -5s; }
         .blob-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: #fbcfe8; opacity: 0.5; animation-duration: 30s; animation-delay: -10s; }
-
         @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, 50px) scale(1.1); } }
 
         /* --- 主容器 --- */
@@ -58,12 +58,12 @@
         .avatar-box img { 
             width: 110px; height: 110px; border-radius: 24px; transform: rotate(-3deg); 
             border: 4px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-            object-fit: cover; /* 防止图片变形 */
+            object-fit: cover;
         }
         .profile-info h1 { margin: 0; font-size: 2.8rem; font-weight: 800; color: var(--text-main); background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .profile-info p { font-size: 1.1rem; color: var(--text-sub); margin-top: 10px; font-weight: 500; margin-bottom: 15px; }
+        .profile-info p { font-size: 1.1rem; color: var(--text-sub); margin-top: 10px; font-weight: 500; margin-bottom: 15px; line-height: 1.6; }
 
-        /* --- 糖果标签 --- */
+        /* 标签 */
         .tags-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
         .candy-tag { font-size: 0.8rem; font-weight: 700; color: white; padding: 6px 14px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; cursor: default; }
         .candy-tag:hover { transform: translateY(-2px); }
@@ -71,37 +71,49 @@
         .tag-purple { background: linear-gradient(135deg, #a78bfa, #7c3aed); box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3); }
         .tag-orange { background: linear-gradient(135deg, #fbbf24, #d97706); box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
         .tag-green { background: linear-gradient(135deg, #34d399, #059669); box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); }
+        /* 抖音色标签 */
+        .tag-dark { background: linear-gradient(135deg, #333, #000); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
-        /* --- 产品卡片 --- */
-        .featured-card { grid-column: span 2; background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.8); }
+        /* --- 普通卡片 --- */
+        .card-2-col { grid-column: span 2; }
+        .card-1-col { grid-column: span 1; }
+        
         .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .icon-box { font-size: 2.8rem; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); color: #4f46e5; }
-        .card-title h2 { margin: 0; font-size: 1.6rem; font-weight: 800; color: #1e1b4b; }
-        .tag-pro { display: inline-block; background: linear-gradient(90deg, #f59e0b, #ea580c); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 6px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); }
-        .card-desc { color: #475569; line-height: 1.7; margin-bottom: 28px; font-size: 1rem; }
+        .icon-box { font-size: 2.5rem; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); color: #4f46e5; flex-shrink: 0; }
+        .card-title h2 { margin: 0; font-size: 1.5rem; font-weight: 800; color: #1e1b4b; }
+        .card-title h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #1e1b4b; }
+        
+        .tag-pro { display: inline-block; background: linear-gradient(90deg, #f59e0b, #ea580c); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 6px; }
+        .ver { font-size: 0.8rem; color: #64748b; background: rgba(255,255,255,0.8); padding: 2px 8px; border-radius: 10px; }
+        
+        .card-desc { color: #475569; line-height: 1.7; margin-bottom: 24px; font-size: 0.95rem; }
         .highlight { color: #ea580c; font-weight: 700; background: rgba(234, 88, 12, 0.1); padding: 0 4px; border-radius: 4px; }
 
+        /* --- 列表式内容 (用于RPA介绍) --- */
+        .feature-list { margin: 0; padding: 0; list-style: none; margin-bottom: 20px; }
+        .feature-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 0.95rem; color: #475569; }
+        .feature-list li::before { content: "✅"; font-size: 0.9rem; }
+        
         /* --- 按钮 --- */
-        .btn-row { display: flex; gap: 12px; margin-top: auto; }
-        .btn { flex: 1; padding: 14px 0; text-align: center; border-radius: 16px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+        .btn-row { display: flex; gap: 10px; margin-top: auto; }
+        .btn { flex: 1; padding: 12px 0; text-align: center; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+        
         .btn-download { background: var(--btn-gradient); color: white; box-shadow: var(--btn-shadow); border: none; }
         .btn-download:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(234, 88, 12, 0.5); }
+        
         .btn-secondary { background: #fff; color: #475569; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .btn-secondary:hover { background: #f8fafc; color: #1e1b4b; transform: translateY(-2px); }
 
-        /* --- 小卡片 --- */
-        .mini-card h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #1e1b4b; }
-        .ver { font-size: 0.8rem; color: #64748b; background: rgba(255,255,255,0.8); padding: 2px 8px; border-radius: 10px; }
-        .mini-card .btn { font-size: 0.9rem; padding: 10px 0; }
+        /* 抖音按钮 (特殊风格) */
+        .btn-douyin { background: #000; color: #fff; box-shadow: var(--douyin-shadow); border: 1px solid #333; }
+        .btn-douyin:hover { background: #222; transform: translateY(-3px); }
 
         /* --- 底部联系 --- */
         .contact-box { grid-column: span 3; padding: 25px; background: rgba(255,255,255,0.7); text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
         .contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: 0.95rem; color: #64748b; }
         
-        .wx-copy-btn { color: #4f46e5; font-weight: 700; cursor: pointer; background: rgba(79, 70, 229, 0.1); padding: 4px 10px; border-radius: 8px; transition: background 0.2s; position: relative; user-select: none; -webkit-user-select: none; }
+        .wx-copy-btn { color: #4f46e5; font-weight: 700; cursor: pointer; background: rgba(79, 70, 229, 0.1); padding: 4px 10px; border-radius: 8px; transition: background 0.2s; position: relative; }
         .wx-copy-btn:hover { background: rgba(79, 70, 229, 0.2); }
-        .wx-copy-btn:active { background: rgba(79, 70, 229, 0.3); }
-        
         .mail-link { color: #ea580c; font-weight: 700; text-decoration: none; background: rgba(234, 88, 12, 0.1); padding: 4px 10px; border-radius: 8px; transition: background 0.2s; }
         .mail-link:hover { background: rgba(234, 88, 12, 0.2); }
 
@@ -118,12 +130,11 @@
         /* 移动端适配 */
         @media (max-width: 900px) {
             .container { display: flex; flex-direction: column; padding: 30px 0; gap: 20px; }
-            .profile-section, .featured-card, .glass-card { grid-column: auto; width: 100%; padding: 24px; }
+            .profile-section, .card-2-col, .card-1-col, .glass-card { grid-column: auto; width: 100%; padding: 24px; }
             .profile-section { flex-direction: column; text-align: center; gap: 15px; }
             .profile-info h1 { font-size: 2.2rem; }
             .tags-container { justify-content: center; }
-
-            /* 手机背景增强 */
+            
             .blob { opacity: 0.6; filter: blur(50px); }
             .blob-1 { width: 300px; height: 300px; top: -50px; left: -50px; background: radial-gradient(circle, #fbbf24 0%, #fed7aa 80%, transparent 100%); }
             .blob-2 { width: 300px; height: 300px; bottom: -50px; right: -50px; background: radial-gradient(circle, #a5b4fc 0%, #e0e7ff 80%, transparent 100%); }
@@ -146,44 +157,45 @@
                 <img src="./avatar.jpg" alt="林焱" onerror="this.src='https://ui-avatars.com/api/?name=Lin+Yan&background=4f46e5&color=fff&size=200&bold=true'">
             </div>
             <div class="profile-info">
-                <h1>林焱 <span style="font-size:0.5em; vertical-align:middle; color:#ea580c; opacity:0.8;">●</span> 电商提效专家</h1>
-                <p>用专业工具，帮卖家省时间、提效率、增利润。</p>
+                <h1>林焱 <span style="font-size:0.5em; vertical-align:middle; color:#ea580c; opacity:0.8;">●</span> 电商财务自动化专家</h1>
+                <p>深度融合 <strong>RPA + AI + Python</strong> 技术。<br>擅长解决跨平台财务对账、自动报税、库存同步、竞品监控等复杂痛点。</p>
                 <div class="tags-container">
-                    <span class="candy-tag tag-blue">独立开发者</span>
-                    <span class="candy-tag tag-purple">RPA 高级开发者</span>
-                    <span class="candy-tag tag-orange">跨境电商</span>
+                    <span class="candy-tag tag-blue">RPA 架构师</span>
+                    <span class="candy-tag tag-purple">电商财务专家</span>
+                    <span class="candy-tag tag-orange">影刀认证</span>
                     <span class="candy-tag tag-green">Python 全栈</span>
+                    <span class="candy-tag tag-dark">抖音博主</span>
                 </div>
             </div>
         </div>
 
-        <div class="glass-card featured-card">
+        <div class="glass-card card-2-col">
             <div class="card-header">
                 <div class="icon-box">🖼️</div>
                 <div class="card-title">
                     <h2>Image Translator Pro</h2>
-                    <div><span class="tag-pro">👑图片批量翻译软件</span></div>
+                    <div><span class="tag-pro">👑 旗舰版 v5.0.4</span></div>
                 </div>
             </div>
             <p class="card-desc">
-                跨境电商必备。一键批量翻译商品图片，<span class="highlight">批量翻译商品图片</span>，彻底告别低效率办公。
+                跨境电商必备。一键批量翻译商品图片，<span class="highlight">AI 智能回填样式</span>，彻底告别低效率办公。
             </p>
             <div class="btn-row">
-                <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7593485077321878713?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary">📖教程</a>
-                <a href="https://hk.gh-proxy.org/https://github.com/linyanRPA/download-center/releases/download/img-v5.0.4/ImageTransPro_v5.0.4.zip" target="_blank" class="btn btn-download">🔥立即下载</a>
+                <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7593485077321878713?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary">📖 教程</a>
+                <a href="https://hk.gh-proxy.org/https://github.com/linyanRPA/download-center/releases/download/img-v5.0.4/ImageTransPro_v5.0.4.zip" target="_blank" class="btn btn-download">🔥 立即下载</a>
             </div>
         </div>
 
-        <div class="glass-card mini-card">
+        <div class="glass-card card-1-col">
             <div class="card-header">
                 <div class="icon-box" style="font-size:2rem; width:56px; height:56px;">📦</div>
                 <div>
-                    <h3>1688商品信息批量采集软件</h3>
+                    <h3>1688 采集工具</h3>
                     <span class="ver">v5.0.1</span>
                 </div>
             </div>
-            <p class="card-desc" style="margin-bottom:15px; font-size: 0.9rem;">
-                通过商品链接，批量采集商品信息自动下载商品图片到本地。
+            <p class="card-desc" style="font-size: 0.9rem;">
+                批量采集商品详情图与属性，自动导出规范SKU。
             </p>
             <div class="btn-row">
                 <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7602587341106040011?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary" style="font-size:0.8rem;">📖 教程</a>
@@ -191,27 +203,51 @@
             </div>
         </div>
 
-        <div class="glass-card mini-card">
+        <div class="glass-card card-2-col">
             <div class="card-header">
-                <div class="icon-box" style="font-size:2rem; width:56px; height:56px;">📊</div>
-                <div>
-                    <h3>更多实用软件</h3>
-                    <span class="ver">可定制</span>
+                <div class="icon-box">⚙️</div>
+                <div class="card-title">
+                    <h2>企业级 RPA 定制服务</h2>
+                    <span class="ver" style="background:#eef2ff; color:#4338ca;">专业定制</span>
                 </div>
             </div>
-            <p class="card-desc" style="margin-bottom:15px; font-size: 0.9rem;">
-                定制软件可满足客户的特殊需求！
+            
+            <p class="card-desc" style="margin-bottom: 15px;">
+                针对电商卖家的<span class="highlight">财务与运营痛点</span>，提供从需求分析到落地部署的一站式自动化解决方案。
+            </p>
+
+            <ul class="feature-list">
+                <li><strong>财务自动化：</strong>多平台流水自动下载、自动对账、生成利润表、税务申报。</li>
+                <li><strong>运营提效：</strong>竞品数据监控、跨平台商品搬运、库存实时同步。</li>
+                <li><strong>技术保障：</strong>基于 影刀RPA / Python / LLM 大模型开发，稳定高效。</li>
+            </ul>
+
+            <div class="btn-row">
+                <a href="javascript:void(0)" onclick="copyWx()" class="btn btn-secondary" style="color: #ea580c;">💬 立即咨询</a>
+            </div>
+        </div>
+
+        <div class="glass-card card-1-col" style="background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(240,240,240,0.8));">
+            <div class="card-header">
+                <div class="icon-box" style="background:#000; color:#fff; font-size:1.8rem;">🎵</div>
+                <div>
+                    <h3>抖音实战案例</h3>
+                    <span class="ver">RPA 演示</span>
+                </div>
+            </div>
+            <p class="card-desc" style="font-size: 0.9rem;">
+                眼见为实！观看我开发的电商财务机器人如何自动工作。
             </p>
             <div class="btn-row">
-                <a href="javascript:void(0)" onclick="copyEmail()" class="btn btn-secondary" style="color: #ea580c; width:100%;">立即联系 (点击复制邮箱)</a>
+                <a href="https://v.douyin.com/Kdekr-dWzkQ/" target="_blank" class="btn btn-douyin">🎥 去抖音观看</a>
             </div>
         </div>
 
         <div class="glass-card contact-box">
             <p style="margin:0; font-weight:bold; color:#1e1b4b;">✨ 商务合作 / 定制开发</p>
             <div class="contact-row">
-                <span>微信: <span class="wx-copy-btn" onclick="copyWx()">linyan7982020</span></span>
-                <span>邮箱: <a href="mailto:linyan222@foxmail.com" class="mail-link">linyan222@foxmail.com</a></span>
+                <span>微信: <span class="wx-copy-btn" onclick="copyWx()">linyan7982020 📋</span></span>
+                <span>邮箱: <a href="mailto:linyan222@foxmail.com" class="mail-link">linyan222@foxmail.com 📧</a></span>
             </div>
         </div>
 
@@ -220,63 +256,24 @@
     <div id="toast">✅ 内容已复制，快去使用吧！</div>
 
     <script>
-        // 复制微信号
-        function copyWx() {
-            copyText("linyan7982020", "✅ 微信号已复制，快去添加吧！");
-        }
-
-        // 复制邮箱
-        function copyEmail() {
-            copyText("linyan222@foxmail.com", "✅ 邮箱已复制，请去发送邮件吧！");
-        }
-
-        // 通用复制核心函数 (兼容处理)
+        function copyWx() { copyText("linyan7982020", "✅ 微信号已复制！"); }
+        function copyEmail() { copyText("linyan222@foxmail.com", "✅ 邮箱已复制！"); }
         function copyText(text, successMsg) {
-            // 尝试新版API
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast(successMsg);
-                }).catch(() => {
-                    fallbackCopy(text, successMsg);
-                });
-            } else {
-                fallbackCopy(text, successMsg);
-            }
+                navigator.clipboard.writeText(text).then(() => showToast(successMsg)).catch(() => fallbackCopy(text, successMsg));
+            } else { fallbackCopy(text, successMsg); }
         }
-
-        // 降级兼容方案
         function fallbackCopy(text, successMsg) {
-            var textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed";
-            textArea.style.left = "-9999px";
-            textArea.style.top = "0";
-            document.body.appendChild(textArea);
-            
-            textArea.focus();
-            textArea.select();
-
-            try {
-                var successful = document.execCommand('copy');
-                if (successful) {
-                    showToast(successMsg);
-                } else {
-                    alert("自动复制失败，请手动复制：" + text);
-                }
-            } catch (err) {
-                alert("浏览器不支持，请手动复制：" + text);
-            }
-            document.body.removeChild(textArea);
+            var ta = document.createElement("textarea"); ta.value = text; ta.style.position="fixed"; ta.style.left="-9999px";
+            document.body.appendChild(ta); ta.focus(); ta.select();
+            try { if(document.execCommand('copy')) showToast(successMsg); else alert("请手动复制："+text); } 
+            catch(e){ alert("请手动复制："+text); } document.body.removeChild(ta);
         }
-
         function showToast(msg) {
-            var x = document.getElementById("toast");
-            x.innerText = msg; // 动态修改提示文字
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            var x = document.getElementById("toast"); x.innerText = msg; x.className = "show";
+            setTimeout(() => x.className = x.className.replace("show", ""), 3000);
         }
     </script>
 
 </body>
 </html>
-
