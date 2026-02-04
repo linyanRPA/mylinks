@@ -3,244 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>林焱 | 独立开发者</title>
+    <title>林焱的软件工坊 | 电商提效专家</title>
     <style>
         :root {
-            --primary: #00f260;
-            --secondary: #0575e6;
-            --purple: #b92b27;
-            --text-main: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --neon-shadow: 0 0 20px rgba(0, 242, 96, 0.3);
+            /* --- 新配色方案：商业信任与增长 --- */
+            /* 背景：干净明亮的浅色渐变 */
+            --bg-gradient: linear-gradient(135deg, #f6f8fd 0%, #eef2f7 100%);
+            /* 文字：深灰强调专业感，避免纯黑的生硬 */
+            --text-main: #1a202c;
+            --text-sub: #4a5568;
+            
+            /* 核心动作色：增长绿（刺激点击） */
+            --action-green: #059669;
+            --action-green-hover: #047857;
+            /* 信任色：科技蓝（强调专业） */
+            --trust-blue: #2563eb;
+            /* 高级色：香槟金（强调旗舰/Pro） */
+            --premium-gold: #d97706;
+
+            /* 卡片质感：高透亮水晶磨砂 */
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.9);
+            /* 投影：柔和的商务蓝投影，增加悬浮感 */
+            --card-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.1), 0 8px 10px -6px rgba(37, 99, 235, 0.05);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #050505;
-            color: white;
+            margin: 0; padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* 手机上改用 flex-start 防止居中截断 */
-            overflow-x: hidden;
-            position: relative;
+            display: flex; justify-content: center; align-items: flex-start;
         }
 
-        /* --- 动态极光背景 --- */
-        .ambient-light {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: #000; overflow: hidden;
+        /* --- 背景装饰：微妙的科技光晕 (不再是霓虹灯) --- */
+        .bg-decoration {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden;
         }
-        .light-blob {
-            position: absolute; filter: blur(80px); opacity: 0.4;
-            animation: float 10s infinite alternate ease-in-out; border-radius: 50%;
+        .bg-blob {
+            position: absolute; filter: blur(100px); opacity: 0.5; z-index: -1;
         }
-        .blob-1 { width: 400px; height: 400px; background: #4c1d95; top: -50px; left: -50px; animation-duration: 12s; }
-        .blob-2 { width: 300px; height: 300px; background: #0ea5e9; bottom: -50px; right: -50px; animation-duration: 15s; }
-        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(20px, 30px); } }
+        /* 使用柔和的蓝绿色块衬托 */
+        .blob-1 { top: -10%; right: -10%; width: 600px; height: 600px; background: rgba(37, 99, 235, 0.15); }
+        .blob-2 { bottom: -10%; left: -10%; width: 500px; height: 500px; background: rgba(5, 150, 105, 0.15); }
 
-        /* --- 主布局 (PC优先) --- */
+        /* --- 主布局 --- */
         .container {
-            width: 90%;
-            max-width: 1000px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* PC端 3列 */
-            gap: 24px;
-            padding: 60px 0;
-            z-index: 10;
+            width: 92%; max-width: 1000px;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; padding: 60px 0; z-index: 10;
         }
 
-        /* --- 卡片通用样式 --- */
+        /* --- 水晶卡片通用样式 --- */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            /* 核心：高亮通透的磨砂效果 */
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.3s ease;
+            box-shadow: var(--card-shadow);
+            border-radius: 20px;
+            padding: 32px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            transition: all 0.3s ease;
         }
 
-        /* PC端悬停效果 */
+        /* PC端悬停：轻微上浮，增加价值感 */
         @media (hover: hover) {
             .glass-card:hover {
                 transform: translateY(-5px);
-                border-color: rgba(255,255,255,0.3);
-                box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+                box-shadow: 0 20px 40px -5px rgba(37, 99, 235, 0.2);
             }
         }
 
         /* --- 个人信息区 --- */
         .profile-section {
-            grid-column: span 3; /* PC占3列 */
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+            grid-column: span 3; display: flex; align-items: center; gap: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
         }
-
         .avatar-box img {
-            width: 110px; height: 110px; border-radius: 20px;
-            border: 2px solid rgba(255,255,255,0.2);
-            box-shadow: 0 0 20px rgba(0, 242, 96, 0.2);
+            width: 100px; height: 100px; border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
         }
-
         .profile-info h1 {
-            margin: 0; font-size: 3rem; font-weight: 800;
-            background: linear-gradient(to right, #fff, #a5f3fc);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin: 0; font-size: 2.5rem; font-weight: 800; color: var(--text-main);
+            letter-spacing: -1px;
         }
-        .profile-info p { font-size: 1.1rem; color: #ccc; margin-top: 10px; line-height: 1.5; }
+        /* 强调“提效专家” */
+        .highlight-title { color: var(--trust-blue); }
+        .profile-info p {
+            font-size: 1.05rem; color: var(--text-sub); margin-top: 8px; line-height: 1.6;
+        }
 
-        /* --- 旗舰产品区 --- */
+        /* --- 旗舰产品区 (强调) --- */
         .featured-card {
-            grid-column: span 2; /* PC占2列 */
-            background: linear-gradient(145deg, rgba(16, 185, 129, 0.1), rgba(0,0,0,0));
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            grid-column: span 2;
+            /* 旗舰卡片带有微妙的蓝色渐变底色，突出地位 */
+            background: linear-gradient(to bottom right, rgba(255,255,255,0.95), rgba(239, 246, 255, 0.8));
+            border: 1px solid rgba(191, 219, 254, 0.5);
         }
 
-        .card-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
+        .card-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
         .icon-box {
-            font-size: 2.2rem; background: rgba(255,255,255,0.1);
-            width: 56px; height: 56px;
+            font-size: 2.5rem; 
+            /* 图标背景改为干净的白色，带轻微投影 */
+            background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 64px; height: 64px;
             display: flex; align-items: center; justify-content: center;
-            border-radius: 14px; flex-shrink: 0; /* 防止图标被压缩 */
+            border-radius: 16px; flex-shrink: 0;
+            color: var(--trust-blue); /* 图标颜色 */
         }
         
-        .tag {
-            display: inline-block; background: #00f260; color: #000;
-            padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;
-            margin-left: 8px; vertical-align: middle;
+        .card-title h2, .card-title h3 { margin: 0; font-weight: 700; color: var(--text-main); }
+        .card-title h2 { font-size: 1.5rem; }
+        .card-title h3 { font-size: 1.25rem; }
+
+        /* 标签：使用金色强调旗舰版，更有价值感 */
+        .tag-pro {
+            display: inline-block; background: #fffbeb; color: var(--premium-gold);
+            border: 1px solid #fcd34d;
+            padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;
+            margin-top: 8px;
         }
+        .ver-text { font-size: 0.85rem; color: var(--text-sub); margin-top: 6px; }
 
-        .card-desc { color: #aaa; line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem; }
+        .card-desc { color: var(--text-sub); line-height: 1.7; margin-bottom: 24px; font-size: 0.95rem; }
+        /* 强调描述里的关键卖点 */
+        .card-desc strong { color: var(--text-main); font-weight: 600; }
 
-        /* --- 按钮 --- */
-        .btn-row { display: flex; gap: 10px; margin-top: auto; }
+        /* --- 按钮设计 (核心转化点) --- */
+        .btn-row { display: flex; gap: 12px; margin-top: auto; }
         .btn {
-            flex: 1; padding: 12px 0; text-align: center; border-radius: 10px;
-            text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            white-space: nowrap; /* 防止文字换行 */
+            flex: 1; padding: 12px 0; text-align: center; border-radius: 12px;
+            text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: all 0.2s; white-space: nowrap;
         }
-        .btn-glow { background: white; color: black; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
-        .btn-outline { border: 1px solid rgba(255,255,255,0.3); color: white; }
+        
+        /* 极速下载按钮：强烈的增长绿，带投影，刺激点击 */
+        .btn-download {
+            background: var(--action-green); color: white;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+            border: none;
+        }
+        .btn-download:hover { background: var(--action-green-hover); transform: translateY(-2px); }
+        
+        /* 教程按钮：干净的次级按钮 */
+        .btn-secondary {
+            background: #fff; color: var(--text-sub);
+            border: 1px solid #e2e8f0;
+        }
+        .btn-secondary:hover { border-color: var(--trust-blue); color: var(--trust-blue); background: #f8fafc; }
+
+        /* 底部联系 */
+        .footer-contact {
+            text-align: center; color: var(--text-sub); font-size: 0.9rem;
+            padding: 20px; background: none; box-shadow: none; border: none; backdrop-filter: none;
+        }
+        .wx-id { color: var(--trust-blue); font-weight: 700; background: rgba(37, 99, 235, 0.1); padding: 2px 6px; border-radius: 4px; }
 
         /* =========================================
-           🚨 核心修复：移动端强制适配 (900px以下)
+           移动端强制适配 (保持不变)
            ========================================= */
         @media (max-width: 900px) {
-            .container {
-                display: flex; /* 弃用 Grid，改用 Flex 垂直排列 */
-                flex-direction: column;
-                width: 92%;
-                padding: 30px 0;
-                gap: 20px;
-            }
-
-            /* 强制所有卡片占满宽度 */
-            .profile-section, .featured-card, .glass-card {
-                grid-column: auto !important; /* 清除 Grid 跨列干扰 */
-                width: 100%;
-                padding: 24px;
-            }
-
-            /* 个人信息改为垂直居中 */
-            .profile-section {
-                flex-direction: column;
-                text-align: center;
-            }
-            .profile-info h1 { font-size: 2.2rem; } /* 缩小字体 */
-            .profile-info p { font-size: 1rem; }
-
-            /* 调整图标和文字布局 */
-            .card-header h2 { font-size: 1.3rem !important; }
-            .card-header h3 { font-size: 1.1rem !important; }
-            
-            /* 背景光斑缩小，防止手机卡顿 */
-            .blob-1 { width: 250px; height: 250px; }
-            .blob-2 { width: 200px; height: 200px; }
+            .container { display: flex; flex-direction: column; gap: 20px; padding: 30px 0; }
+            .profile-section, .featured-card, .glass-card { grid-column: auto !important; width: 100%; padding: 24px; }
+            .profile-section { flex-direction: column; text-align: center; gap: 20px; }
+            .profile-info h1 { font-size: 2rem; }
+            .blob-1, .blob-2 { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-light">
-        <div class="light-blob blob-1"></div>
-        <div class="light-blob blob-2"></div>
+    <div class="bg-decoration">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
     </div>
 
     <div class="container">
         
         <div class="glass-card profile-section">
             <div class="avatar-box">
-                <img src="https://ui-avatars.com/api/?name=Lin+Yan&background=0D8ABC&color=fff&size=200&bold=true" alt="Avatar">
+                <img src="https://ui-avatars.com/api/?name=Lin+Yan&background=2563eb&color=fff&size=200&bold=true" alt="林焱">
             </div>
             <div class="profile-info">
-                <h1>LIN YAN.</h1>
-                <p>独立开发者 / 电商财务自动化 / RPA 专家<br>用代码重构跨境电商工作流。</p>
+                <h1>林焱 | <span class="highlight-title">电商提效专家</span></h1>
+                <p>专注开发跨境电商自动化工具与财务 RPA 脚本。<br>用专业工具，帮卖家省时间、提效率、增利润。</p>
             </div>
         </div>
 
         <div class="glass-card featured-card">
             <div class="card-header">
                 <div class="icon-box">🖼️</div>
-                <div>
-                    <h2 style="margin:0;">Image Translator</h2>
-                    <div style="margin-top:5px;"><span class="tag">Pro v5.0.9</span></div>
+                <div class="card-title">
+                    <h2>图片本地化翻译 Pro</h2>
+                    <div><span class="tag-pro">👑 旗舰版 v5.0.9</span></div>
                 </div>
             </div>
             <p class="card-desc">
-                跨境电商“图片本地化”神器。一键批量翻译主图，AI 智能回填样式，保留原图排版，无需 PS。
+                跨境卖家必备。一键批量翻译商品主图，<strong>AI 智能回填样式，完美保留原图排版</strong>。彻底告别 PS 手工修图的繁琐，上新速度提升 10 倍。
             </p>
             <div class="btn-row">
-                <a href="#" class="btn btn-outline">📖 教程</a>
-                <a href="https://ghproxy.net/https://github.com/linyanRPA/download-center/releases/download/img-v5.0.3/AI.ImageTransPro_v5.0.3.zip" target="_blank" class="btn btn-glow">⬇️ 高速下载</a>
+                <a href="#" class="btn btn-secondary">📄 功能介绍</a>
+                <a href="https://ghproxy.net/https://github.com/linyanRPA/download-center/releases/download/img-v5.0.3/AI.ImageTransPro_v5.0.3.zip" target="_blank" class="btn btn-download">🚀 立即下载 (高速)</a>
             </div>
         </div>
 
         <div class="glass-card">
             <div class="card-header">
                 <div class="icon-box">📦</div>
-                <div>
-                    <h3 style="margin:0;">1688 批量采集</h3>
-                    <div style="font-size:0.8rem; color:#888; margin-top:4px;">版本 v5.0.1</div>
+                <div class="card-title">
+                    <h3>1688 批量采集工具</h3>
+                    <div class="ver-text">稳定版 v5.0.1</div>
                 </div>
             </div>
-            <p class="card-desc">高速抓取商品详情，SKU数据自动导出。</p>
+            <p class="card-desc">高速抓取商品详情图与属性，SKU 数据自动规范导出。</p>
             <div class="btn-row">
-                <a href="#" class="btn btn-outline">下载</a>
+                 <a href="#" class="btn btn-download">⬇️ 获取工具</a>
             </div>
         </div>
 
         <div class="glass-card">
             <div class="card-header">
                 <div class="icon-box">📊</div>
-                <div>
-                    <h3 style="margin:0;">电商财务助手</h3>
-                    <div style="font-size:0.8rem; color:#888; margin-top:4px;">版本 v2.1</div>
+                <div class="card-title">
+                    <h3>电商财务对账助手</h3>
+                    <div class="ver-text">正式版 v2.1</div>
                 </div>
             </div>
-            <p class="card-desc">自动合并多平台报表，一键计算利润。</p>
+            <p class="card-desc">自动合并多平台报表，一键精准计算利润与 ROI 分析。</p>
             <div class="btn-row">
-                <a href="#" class="btn btn-outline">下载</a>
+                <a href="#" class="btn btn-download">⬇️ 获取工具</a>
             </div>
         </div>
 
-        <div class="glass-card" style="grid-column: span 3; text-align: center; padding: 20px;">
-            <p style="margin:0; color:#aaa; font-size: 0.9rem;">
-                ✨ 定制开发请联系微信：<span style="color:white; font-weight:bold;">LinYanDev</span>
-            </p>
+        <div class="glass-card footer-contact">
+            <p>✨ 如需企业级定制开发 / RPA 咨询，请联系微信：<span class="wx-id">LinYanDev</span></p>
         </div>
 
     </div>
