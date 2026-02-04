@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>林焱的软件工坊</title>
+    <title>林焱的软件工坊 | 电商提效专家</title>
     <style>
         :root {
-            /* 拒绝黑白！使用高饱和度的情绪色 
-               Warm Orange: 激发欲望、活力
-               Deep Purple: 沉稳、高端
-            */
+            /* 核心配色：暖橙(活力) + 蓝紫(专业) */
             --bg-color: #f3f4f6;
-            --text-main: #1e1b4b; /* 深靛蓝，代替纯黑 */
-            --text-sub: #4338ca;  /* 蓝紫色，代替纯灰 */
+            --text-main: #1e1b4b; /* 深靛蓝 */
+            --text-sub: #4338ca;  /* 蓝紫色 */
             
-            /* 按钮渐变：像糖果一样诱人 */
+            /* 按钮渐变：诱人的糖果色 */
             --btn-gradient: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
             --btn-shadow: 0 10px 20px -5px rgba(234, 88, 12, 0.4);
         }
@@ -32,37 +29,29 @@
             position: relative;
         }
 
-        /* --- 核心：弥散极光背景 (Aurora Background) --- */
+        /* --- 弥散极光背景 --- */
         .aurora-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: #ffffff;
         }
-        
-        /* 定义三个巨大的彩色光球，并在后台缓慢游动 */
         .blob {
             position: absolute; border-radius: 50%;
             filter: blur(80px); opacity: 0.6;
             animation: float 20s infinite alternate ease-in-out;
         }
-        /* 光球1：暖橙色 (左上，强调活力) */
         .blob-1 {
             top: -10%; left: -10%; width: 50vw; height: 50vw;
-            background: #fed7aa; /* 浅橙 */
             background: radial-gradient(circle, #fbbf24 0%, #fed7aa 70%, transparent 100%);
             animation-duration: 25s;
         }
-        /* 光球2：蓝紫色 (右下，强调科技) */
         .blob-2 {
             bottom: -10%; right: -10%; width: 50vw; height: 50vw;
-            background: #c7d2fe; /* 浅紫 */
             background: radial-gradient(circle, #a5b4fc 0%, #e0e7ff 70%, transparent 100%);
             animation-duration: 20s; animation-delay: -5s;
         }
-        /* 光球3：粉色点缀 (中间，增加丰富度) */
         .blob-3 {
             top: 40%; left: 40%; width: 30vw; height: 30vw;
-            background: #fbcfe8; /* 粉色 */
-            opacity: 0.4;
+            background: #fbcfe8; opacity: 0.4;
             animation-duration: 30s; animation-delay: -10s;
         }
 
@@ -78,18 +67,15 @@
             gap: 24px; padding: 60px 0; z-index: 10;
         }
 
-        /* --- 磨砂糖果卡片 --- */
+        /* --- 磨砂玻璃卡片 --- */
         .glass-card {
-            /* 关键：高透明度白色，让背景色透出来 */
             background: rgba(255, 255, 255, 0.4);
-            /* 强烈的毛玻璃效果 */
             backdrop-filter: blur(24px) saturate(120%);
             -webkit-backdrop-filter: blur(24px) saturate(120%);
-            /* 边框要细且亮，像水晶的棱角 */
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 24px;
             padding: 32px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05); /* 极淡的投影 */
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
             display: flex; flex-direction: column; justify-content: space-between;
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -103,21 +89,18 @@
             }
         }
 
-        /* --- 个人信息区 --- */
+        /* --- 头部信息 --- */
         .profile-section {
             grid-column: span 3; display: flex; align-items: center; gap: 30px;
         }
         .avatar-box img {
             width: 110px; height: 110px; border-radius: 24px;
-            /* 头像增加一点旋转角度，看起来更活泼 */
             transform: rotate(-3deg);
             border: 4px solid #fff;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         .profile-info h1 {
             margin: 0; font-size: 2.8rem; font-weight: 800; color: var(--text-main);
-            letter-spacing: -1px;
-            /* 标题使用渐变色 */
             background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
@@ -128,7 +111,6 @@
         /* --- 旗舰卡片 (Image Translator) --- */
         .featured-card {
             grid-column: span 2;
-            /* 旗舰卡片背景稍微白一点，突出主体 */
             background: rgba(255, 255, 255, 0.55);
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
@@ -144,8 +126,6 @@
         }
         
         .card-title h2 { margin: 0; font-size: 1.6rem; font-weight: 800; color: #1e1b4b; }
-        
-        /* 标签：使用醒目的渐变色 */
         .tag-pro {
             display: inline-block; 
             background: linear-gradient(90deg, #f59e0b, #ea580c);
@@ -159,33 +139,31 @@
         }
         .highlight { color: #ea580c; font-weight: 700; background: rgba(234, 88, 12, 0.1); padding: 0 4px; border-radius: 4px; }
 
-        /* --- 按钮 (欲望的来源) --- */
-        .btn-row { display: flex; gap: 15px; margin-top: auto; }
+        /* --- 按钮样式 --- */
+        .btn-row { display: flex; gap: 12px; margin-top: auto; }
         .btn {
             flex: 1; padding: 14px 0; text-align: center; border-radius: 16px;
-            text-decoration: none; font-weight: 700; font-size: 1rem;
+            text-decoration: none; font-weight: 700; font-size: 0.95rem;
             transition: all 0.2s; white-space: nowrap;
         }
         
-        /* 下载按钮：日落渐变，非常诱人 */
         .btn-download {
             background: var(--btn-gradient); color: white;
             box-shadow: var(--btn-shadow); border: none;
         }
-        .btn-download:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 15px 30px -5px rgba(234, 88, 12, 0.5); 
-        }
+        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(234, 88, 12, 0.5); }
 
         .btn-secondary {
             background: #fff; color: #475569;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .btn-secondary:hover { background: #f8fafc; color: #1e1b4b; }
+        .btn-secondary:hover { background: #f8fafc; color: #1e1b4b; transform: translateY(-2px); }
 
         /* --- 小卡片样式 --- */
         .mini-card h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #1e1b4b; }
         .ver { font-size: 0.8rem; color: #64748b; background: rgba(255,255,255,0.8); padding: 2px 8px; border-radius: 10px; }
+        /* 小卡片的按钮特殊调整 */
+        .mini-card .btn { font-size: 0.9rem; padding: 10px 0; }
 
         /* 移动端适配 */
         @media (max-width: 900px) {
@@ -193,7 +171,6 @@
             .profile-section, .featured-card, .glass-card { grid-column: auto; width: 100%; padding: 24px; }
             .profile-section { flex-direction: column; text-align: center; gap: 15px; }
             .profile-info h1 { font-size: 2.2rem; }
-            /* 手机上背景光球稍微弱一点 */
             .blob { opacity: 0.4; }
         }
     </style>
@@ -213,8 +190,8 @@
                 <img src="https://ui-avatars.com/api/?name=Lin+Yan&background=4f46e5&color=fff&size=200&bold=true" alt="林焱">
             </div>
             <div class="profile-info">
-                <h1>林焱 <span style="font-size:0.5em; vertical-align:middle; color:#ea580c; opacity:0.8;">●</span> 提效专家</h1>
-                <p>独立开发 · 跨境电商 · 财务自动化<br>用好看好用的工具，让数据为你赚钱。</p>
+                <h1>林焱 <span style="font-size:0.5em; vertical-align:middle; color:#ea580c; opacity:0.8;">●</span> 电商提效专家</h1>
+                <p>独立开发 · 跨境电商 · 自动化 RPA<br>用专业工具，帮卖家省时间、提效率、增利润。</p>
             </div>
         </div>
 
@@ -223,15 +200,15 @@
                 <div class="icon-box">🖼️</div>
                 <div class="card-title">
                     <h2>Image Translator Pro</h2>
-                    <div><span class="tag-pro">👑 旗舰版 v5.0.9</span></div>
+                    <div><span class="tag-pro">👑 旗舰版 v5.0.3</span></div>
                 </div>
             </div>
             <p class="card-desc">
-                跨境电商的“修图革命”。一键批量翻译主图，<span class="highlight">AI 智能回填样式</span>，完美保留原图排版。上新速度提升 10 倍，单量自然来。
+                跨境电商必备。一键批量翻译主图，<span class="highlight">AI 智能回填样式</span>，完美保留原图排版。彻底告别 PS 手工修图的繁琐。
             </p>
             <div class="btn-row">
-                <a href="#" class="btn btn-secondary">⚡ 功能演示</a>
-                <a href="https://ghproxy.net/https://github.com/linyanRPA/download-center/releases/download/img-v5.0.3/AI.ImageTransPro_v5.0.3.zip" target="_blank" class="btn btn-download">🔥 立即下载</a>
+                <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7593485077321878713?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary">📖 飞书教程</a>
+                <a href="https://hk.gh-proxy.org/https://github.com/linyanRPA/download-center/releases/download/img-v5.0.3/AI.ImageTransPro_v5.0.3.zip" target="_blank" class="btn btn-download">🔥 立即下载</a>
             </div>
         </div>
 
@@ -239,13 +216,16 @@
             <div class="card-header">
                 <div class="icon-box" style="font-size:2rem; width:56px; height:56px;">📦</div>
                 <div>
-                    <h3>1688 采集工具</h3>
+                    <h3>1688 批量采集</h3>
                     <span class="ver">v5.0.1</span>
                 </div>
             </div>
-            <p class="card-desc" style="margin-bottom:15px;">商品详情/属性/SKU 极速抓取，数据规范导出。</p>
+            <p class="card-desc" style="margin-bottom:15px; font-size: 0.9rem;">
+                高速抓取商品详情图与属性，SKU 数据自动导出。
+            </p>
             <div class="btn-row">
-                <a href="#" class="btn btn-secondary" style="color: #ea580c;">⬇️ 获取</a>
+                <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7602587341106040011?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary" style="font-size:0.8rem;">📖 教程</a>
+                <a href="https://hk.gh-proxy.org/https://github.com/linyanRPA/download-center/releases/download/1688%E7%88%AC%E8%99%AB-5.0.1/1688.5.0.1.zip" target="_blank" class="btn btn-download" style="font-size:0.8rem;">⬇️ 下载</a>
             </div>
         </div>
 
@@ -257,9 +237,11 @@
                     <span class="ver">v2.1</span>
                 </div>
             </div>
-            <p class="card-desc" style="margin-bottom:15px;">多平台报表自动合并，一键算利润，拒绝烂账。</p>
+            <p class="card-desc" style="margin-bottom:15px; font-size: 0.9rem;">
+                多平台报表自动合并，一键算利润，拒绝烂账。
+            </p>
             <div class="btn-row">
-                <a href="#" class="btn btn-secondary" style="color: #ea580c;">⬇️ 获取</a>
+                <a href="#" class="btn btn-secondary" style="color: #ea580c; width:100%;">⬇️ 即将更新</a>
             </div>
         </div>
 
