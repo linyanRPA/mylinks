@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>林焱的软件工坊 | 电商提效专家</title>
+    <title>我是林焱 | 电商提效专家</title>
     <style>
         :root {
             --bg-color: #f3f4f6;
@@ -26,7 +26,7 @@
             position: relative;
         }
 
-        /* --- 弥散极光背景 (增强版) --- */
+        /* --- 弥散极光背景 --- */
         .aurora-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #ffffff; }
         .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.7; animation: float 20s infinite alternate ease-in-out; }
         
@@ -42,7 +42,7 @@
 
         /* --- 卡片通用 --- */
         .glass-card {
-            background: rgba(255, 255, 255, 0.5); /* 增加一点不透明度，防止手机背景太花影响文字 */
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(24px) saturate(120%); -webkit-backdrop-filter: blur(24px) saturate(120%);
             border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 24px; padding: 32px;
             box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
@@ -55,7 +55,11 @@
 
         /* --- 个人信息 --- */
         .profile-section { grid-column: span 3; display: flex; align-items: center; gap: 30px; }
-        .avatar-box img { width: 110px; height: 110px; border-radius: 24px; transform: rotate(-3deg); border: 4px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .avatar-box img { 
+            width: 110px; height: 110px; border-radius: 24px; transform: rotate(-3deg); 
+            border: 4px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            object-fit: cover; /* 防止图片变形 */
+        }
         .profile-info h1 { margin: 0; font-size: 2.8rem; font-weight: 800; color: var(--text-main); background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .profile-info p { font-size: 1.1rem; color: var(--text-sub); margin-top: 10px; font-weight: 500; margin-bottom: 15px; }
 
@@ -79,7 +83,7 @@
 
         /* --- 按钮 --- */
         .btn-row { display: flex; gap: 12px; margin-top: auto; }
-        .btn { flex: 1; padding: 14px 0; text-align: center; border-radius: 16px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; white-space: nowrap; }
+        .btn { flex: 1; padding: 14px 0; text-align: center; border-radius: 16px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
         .btn-download { background: var(--btn-gradient); color: white; box-shadow: var(--btn-shadow); border: none; }
         .btn-download:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(234, 88, 12, 0.5); }
         .btn-secondary { background: #fff; color: #475569; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -111,9 +115,7 @@
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 100px; }
 
-        /* =========================================
-           🚨 移动端适配 (背景增强与布局)
-           ========================================= */
+        /* 移动端适配 */
         @media (max-width: 900px) {
             .container { display: flex; flex-direction: column; padding: 30px 0; gap: 20px; }
             .profile-section, .featured-card, .glass-card { grid-column: auto; width: 100%; padding: 24px; }
@@ -121,9 +123,8 @@
             .profile-info h1 { font-size: 2.2rem; }
             .tags-container { justify-content: center; }
 
-            /* 手机背景增强：增加尺寸和不透明度，解决全是白色的问题 */
+            /* 手机背景增强 */
             .blob { opacity: 0.6; filter: blur(50px); }
-            /* 使用固定像素而不是vw，确保在手机上足够大 */
             .blob-1 { width: 300px; height: 300px; top: -50px; left: -50px; background: radial-gradient(circle, #fbbf24 0%, #fed7aa 80%, transparent 100%); }
             .blob-2 { width: 300px; height: 300px; bottom: -50px; right: -50px; background: radial-gradient(circle, #a5b4fc 0%, #e0e7ff 80%, transparent 100%); }
             .blob-3 { width: 200px; height: 200px; top: 30%; left: 50%; transform: translateX(-50%); opacity: 0.5; }
@@ -142,7 +143,7 @@
         
         <div class="glass-card profile-section">
             <div class="avatar-box">
-                <img src="https://ui-avatars.com/api/?name=Lin+Yan&background=4f46e5&color=fff&size=200&bold=true" alt="林焱">
+                <img src="./avatar.jpg" alt="林焱" onerror="this.src='https://ui-avatars.com/api/?name=Lin+Yan&background=4f46e5&color=fff&size=200&bold=true'">
             </div>
             <div class="profile-info">
                 <h1>林焱 <span style="font-size:0.5em; vertical-align:middle; color:#ea580c; opacity:0.8;">●</span> 电商提效专家</h1>
@@ -202,45 +203,51 @@
                 定制软件可满足客户的特殊需求！
             </p>
             <div class="btn-row">
-                <a href="#" class="btn btn-secondary" style="color: #ea580c; width:100%;">立即联系</a>
+                <a href="javascript:void(0)" onclick="copyEmail()" class="btn btn-secondary" style="color: #ea580c; width:100%;">立即联系 (点击复制邮箱)</a>
             </div>
         </div>
 
         <div class="glass-card contact-box">
             <p style="margin:0; font-weight:bold; color:#1e1b4b;">✨ 商务合作 / 定制开发</p>
             <div class="contact-row">
-                <span>微信: <span class="wx-copy-btn" onclick="copyWx(this)">linyan7982020 📋</span></span>
-                <span>邮箱: <a href="mailto:linyan222@foxmail.com" class="mail-link">linyan222@foxmail.com 📧</a></span>
+                <span>微信: <span class="wx-copy-btn" onclick="copyWx()">linyan7982020</span></span>
+                <span>邮箱: <a href="mailto:linyan222@foxmail.com" class="mail-link">linyan222@foxmail.com</a></span>
             </div>
         </div>
 
     </div>
 
-    <div id="toast">✅ 微信号已复制，快去添加吧！</div>
+    <div id="toast">✅ 内容已复制，快去使用吧！</div>
 
     <script>
-        function copyWx(element) {
-            const wxId = "linyan7982020";
-            
-            // 方法1：尝试新版 API
+        // 复制微信号
+        function copyWx() {
+            copyText("linyan7982020", "✅ 微信号已复制，快去添加吧！");
+        }
+
+        // 复制邮箱
+        function copyEmail() {
+            copyText("linyan222@foxmail.com", "✅ 邮箱已复制，请去发送邮件吧！");
+        }
+
+        // 通用复制核心函数 (兼容处理)
+        function copyText(text, successMsg) {
+            // 尝试新版API
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(wxId).then(() => {
-                    showToast();
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(successMsg);
                 }).catch(() => {
-                    fallbackCopyTextToClipboard(wxId); // 失败则用旧方法
+                    fallbackCopy(text, successMsg);
                 });
             } else {
-                // 方法2：使用旧版兼容方法 (execCommand)
-                fallbackCopyTextToClipboard(wxId);
+                fallbackCopy(text, successMsg);
             }
         }
 
-        // 旧版复制方法：创建一个隐藏的输入框来复制
-        function fallbackCopyTextToClipboard(text) {
+        // 降级兼容方案
+        function fallbackCopy(text, successMsg) {
             var textArea = document.createElement("textarea");
             textArea.value = text;
-            
-            // 确保输入框不在屏幕上显示
             textArea.style.position = "fixed";
             textArea.style.left = "-9999px";
             textArea.style.top = "0";
@@ -252,21 +259,20 @@
             try {
                 var successful = document.execCommand('copy');
                 if (successful) {
-                    showToast();
+                    showToast(successMsg);
                 } else {
-                    alert("复制失败，请长按微信号手动复制");
+                    alert("自动复制失败，请手动复制：" + text);
                 }
             } catch (err) {
-                alert("浏览器不支持自动复制，请手动输入");
+                alert("浏览器不支持，请手动复制：" + text);
             }
-
             document.body.removeChild(textArea);
         }
 
-        function showToast() {
+        function showToast(msg) {
             var x = document.getElementById("toast");
+            x.innerText = msg; // 动态修改提示文字
             x.className = "show";
-            // 3秒后自动消失
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
     </script>
