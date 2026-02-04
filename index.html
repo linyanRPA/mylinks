@@ -26,12 +26,15 @@
             position: relative;
         }
 
-        /* --- 背景动画 --- */
+        /* --- 弥散极光背景 (增强版) --- */
         .aurora-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #ffffff; }
-        .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; animation: float 20s infinite alternate ease-in-out; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.7; animation: float 20s infinite alternate ease-in-out; }
+        
+        /* 电脑端光球 */
         .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, #fbbf24 0%, #fed7aa 70%, transparent 100%); animation-duration: 25s; }
         .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, #a5b4fc 0%, #e0e7ff 70%, transparent 100%); animation-duration: 20s; animation-delay: -5s; }
-        .blob-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: #fbcfe8; opacity: 0.4; animation-duration: 30s; animation-delay: -10s; }
+        .blob-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: #fbcfe8; opacity: 0.5; animation-duration: 30s; animation-delay: -10s; }
+
         @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, 50px) scale(1.1); } }
 
         /* --- 主容器 --- */
@@ -39,7 +42,7 @@
 
         /* --- 卡片通用 --- */
         .glass-card {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.5); /* 增加一点不透明度，防止手机背景太花影响文字 */
             backdrop-filter: blur(24px) saturate(120%); -webkit-backdrop-filter: blur(24px) saturate(120%);
             border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 24px; padding: 32px;
             box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
@@ -47,7 +50,7 @@
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         @media (hover: hover) {
-            .glass-card:hover { transform: translateY(-8px) scale(1.01); background: rgba(255, 255, 255, 0.6); box-shadow: 0 20px 40px rgba(31, 38, 135, 0.1); border-color: #fff; }
+            .glass-card:hover { transform: translateY(-8px) scale(1.01); background: rgba(255, 255, 255, 0.7); box-shadow: 0 20px 40px rgba(31, 38, 135, 0.1); border-color: #fff; }
         }
 
         /* --- 个人信息 --- */
@@ -56,23 +59,17 @@
         .profile-info h1 { margin: 0; font-size: 2.8rem; font-weight: 800; color: var(--text-main); background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .profile-info p { font-size: 1.1rem; color: var(--text-sub); margin-top: 10px; font-weight: 500; margin-bottom: 15px; }
 
-        /* --- 🍬 糖果标签样式 (新增) --- */
+        /* --- 糖果标签 --- */
         .tags-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-        .candy-tag {
-            font-size: 0.8rem; font-weight: 700; color: white;
-            padding: 6px 14px; border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.2s; cursor: default;
-        }
+        .candy-tag { font-size: 0.8rem; font-weight: 700; color: white; padding: 6px 14px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; cursor: default; }
         .candy-tag:hover { transform: translateY(-2px); }
-        /* 不同的糖果色 */
         .tag-blue { background: linear-gradient(135deg, #60a5fa, #3b82f6); box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
         .tag-purple { background: linear-gradient(135deg, #a78bfa, #7c3aed); box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3); }
         .tag-orange { background: linear-gradient(135deg, #fbbf24, #d97706); box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
         .tag-green { background: linear-gradient(135deg, #34d399, #059669); box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); }
 
         /* --- 产品卡片 --- */
-        .featured-card { grid-column: span 2; background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.8); }
+        .featured-card { grid-column: span 2; background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.8); }
         .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
         .icon-box { font-size: 2.8rem; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); color: #4f46e5; }
         .card-title h2 { margin: 0; font-size: 1.6rem; font-weight: 800; color: #1e1b4b; }
@@ -93,45 +90,43 @@
         .ver { font-size: 0.8rem; color: #64748b; background: rgba(255,255,255,0.8); padding: 2px 8px; border-radius: 10px; }
         .mini-card .btn { font-size: 0.9rem; padding: 10px 0; }
 
-        /* --- 底部联系 (新增样式) --- */
-        .contact-box { grid-column: span 3; padding: 25px; background: rgba(255,255,255,0.6); text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        /* --- 底部联系 --- */
+        .contact-box { grid-column: span 3; padding: 25px; background: rgba(255,255,255,0.7); text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
         .contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: 0.95rem; color: #64748b; }
         
-        /* 微信复制按钮 */
-        .wx-copy-btn {
-            color: #4f46e5; font-weight: 700; cursor: pointer;
-            background: rgba(79, 70, 229, 0.1); padding: 4px 10px; border-radius: 8px;
-            transition: background 0.2s; position: relative;
-        }
+        .wx-copy-btn { color: #4f46e5; font-weight: 700; cursor: pointer; background: rgba(79, 70, 229, 0.1); padding: 4px 10px; border-radius: 8px; transition: background 0.2s; position: relative; user-select: none; -webkit-user-select: none; }
         .wx-copy-btn:hover { background: rgba(79, 70, 229, 0.2); }
-        .wx-copy-btn:active { transform: scale(0.95); }
+        .wx-copy-btn:active { background: rgba(79, 70, 229, 0.3); }
         
-        /* 邮箱链接 */
-        .mail-link {
-            color: #ea580c; font-weight: 700; text-decoration: none;
-            background: rgba(234, 88, 12, 0.1); padding: 4px 10px; border-radius: 8px;
-            transition: background 0.2s;
-        }
+        .mail-link { color: #ea580c; font-weight: 700; text-decoration: none; background: rgba(234, 88, 12, 0.1); padding: 4px 10px; border-radius: 8px; transition: background 0.2s; }
         .mail-link:hover { background: rgba(234, 88, 12, 0.2); }
 
-        /* 复制成功的提示框 (Toast) */
+        /* --- 提示框 --- */
         #toast {
-            visibility: hidden; min-width: 250px; background-color: rgba(0,0,0,0.8); color: #fff;
-            text-align: center; border-radius: 50px; padding: 16px; position: fixed; z-index: 100;
-            left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 1rem;
+            visibility: hidden; min-width: 200px; background-color: rgba(30, 27, 75, 0.9); color: #fff;
+            text-align: center; border-radius: 50px; padding: 16px; position: fixed; z-index: 999;
+            left: 50%; bottom: 80px; transform: translateX(-50%); font-size: 0.95rem; font-weight: 500;
             opacity: 0; transition: opacity 0.3s, bottom 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); backdrop-filter: blur(8px);
         }
-        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+        #toast.show { visibility: visible; opacity: 1; bottom: 100px; }
 
-        /* 移动端适配 */
+        /* =========================================
+           🚨 移动端适配 (背景增强与布局)
+           ========================================= */
         @media (max-width: 900px) {
             .container { display: flex; flex-direction: column; padding: 30px 0; gap: 20px; }
             .profile-section, .featured-card, .glass-card { grid-column: auto; width: 100%; padding: 24px; }
             .profile-section { flex-direction: column; text-align: center; gap: 15px; }
             .profile-info h1 { font-size: 2.2rem; }
-            .blob { opacity: 0.4; }
             .tags-container { justify-content: center; }
+
+            /* 手机背景增强：增加尺寸和不透明度，解决全是白色的问题 */
+            .blob { opacity: 0.6; filter: blur(50px); }
+            /* 使用固定像素而不是vw，确保在手机上足够大 */
+            .blob-1 { width: 300px; height: 300px; top: -50px; left: -50px; background: radial-gradient(circle, #fbbf24 0%, #fed7aa 80%, transparent 100%); }
+            .blob-2 { width: 300px; height: 300px; bottom: -50px; right: -50px; background: radial-gradient(circle, #a5b4fc 0%, #e0e7ff 80%, transparent 100%); }
+            .blob-3 { width: 200px; height: 200px; top: 30%; left: 50%; transform: translateX(-50%); opacity: 0.5; }
         }
     </style>
 </head>
@@ -214,7 +209,7 @@
         <div class="glass-card contact-box">
             <p style="margin:0; font-weight:bold; color:#1e1b4b;">✨ 商务合作 / 定制开发</p>
             <div class="contact-row">
-                <span>微信: <span id="wx-id" class="wx-copy-btn" onclick="copyWx()">linyan7982020 📋</span></span>
+                <span>微信: <span class="wx-copy-btn" onclick="copyWx(this)">linyan7982020 📋</span></span>
                 <span>邮箱: <a href="mailto:linyan222@foxmail.com" class="mail-link">linyan222@foxmail.com 📧</a></span>
             </div>
         </div>
@@ -224,19 +219,54 @@
     <div id="toast">✅ 微信号已复制，快去添加吧！</div>
 
     <script>
-        function copyWx() {
+        function copyWx(element) {
             const wxId = "linyan7982020";
-            navigator.clipboard.writeText(wxId).then(() => {
-                showToast();
-            }).catch(err => {
-                // 备用方案：如果浏览器不支持自动复制，提示手动复制
-                prompt("请手动复制微信号：", wxId);
-            });
+            
+            // 方法1：尝试新版 API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(wxId).then(() => {
+                    showToast();
+                }).catch(() => {
+                    fallbackCopyTextToClipboard(wxId); // 失败则用旧方法
+                });
+            } else {
+                // 方法2：使用旧版兼容方法 (execCommand)
+                fallbackCopyTextToClipboard(wxId);
+            }
+        }
+
+        // 旧版复制方法：创建一个隐藏的输入框来复制
+        function fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // 确保输入框不在屏幕上显示
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                if (successful) {
+                    showToast();
+                } else {
+                    alert("复制失败，请长按微信号手动复制");
+                }
+            } catch (err) {
+                alert("浏览器不支持自动复制，请手动输入");
+            }
+
+            document.body.removeChild(textArea);
         }
 
         function showToast() {
             var x = document.getElementById("toast");
             x.className = "show";
+            // 3秒后自动消失
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
     </script>
