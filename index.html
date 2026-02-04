@@ -11,9 +11,9 @@
             --text-sub: #4338ca;
             --btn-gradient: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
             --btn-shadow: 0 10px 20px -5px rgba(234, 88, 12, 0.4);
-            /* 抖音黑 */
-            --douyin-bg: #111111;
-            --douyin-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+            /* 抖音官方红 */
+            --douyin-gradient: linear-gradient(135deg, #fe2c55 0%, #e02045 100%);
+            --douyin-shadow: 0 10px 20px -5px rgba(254, 44, 85, 0.4);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -71,8 +71,8 @@
         .tag-purple { background: linear-gradient(135deg, #a78bfa, #7c3aed); box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3); }
         .tag-orange { background: linear-gradient(135deg, #fbbf24, #d97706); box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
         .tag-green { background: linear-gradient(135deg, #34d399, #059669); box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); }
-        /* 抖音色标签 */
-        .tag-dark { background: linear-gradient(135deg, #333, #000); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        /* 新增：红色标签 */
+        .tag-red { background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 4px 10px rgba(185, 28, 28, 0.3); }
 
         /* --- 普通卡片 --- */
         .card-2-col { grid-column: span 2; }
@@ -104,9 +104,9 @@
         .btn-secondary { background: #fff; color: #475569; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .btn-secondary:hover { background: #f8fafc; color: #1e1b4b; transform: translateY(-2px); }
 
-        /* 抖音按钮 (特殊风格) */
-        .btn-douyin { background: #000; color: #fff; box-shadow: var(--douyin-shadow); border: 1px solid #333; }
-        .btn-douyin:hover { background: #222; transform: translateY(-3px); }
+        /* 抖音按钮 (修改为抖音红渐变) */
+        .btn-douyin { background: var(--douyin-gradient); color: #fff; box-shadow: var(--douyin-shadow); border: none; }
+        .btn-douyin:hover { filter: brightness(1.1); transform: translateY(-3px); }
 
         /* --- 底部联系 --- */
         .contact-box { grid-column: span 3; padding: 25px; background: rgba(255,255,255,0.7); text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
@@ -188,9 +188,9 @@
 
         <div class="glass-card card-1-col">
             <div class="card-header">
-                <div class="icon-box" style="font-size:2rem; width:56px; height:56px;">📦</div>
+                <div class="icon-box" style="font-size:2rem; width:56px; height:56px;">🏬</div>
                 <div>
-                    <h3>1688商品信息采集工具</h3>
+                    <h3>1688商品信息批量采集软件</h3>
                     <span class="ver">v5.0.1</span>
                 </div>
             </div>
@@ -229,7 +229,7 @@
 
         <div class="glass-card card-1-col" style="background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(240,240,240,0.8));">
             <div class="card-header">
-                <div class="icon-box" style="background:#000; color:#fff; font-size:1.8rem;">🎵</div>
+                <div class="icon-box" style="background:#000; color:#fff; font-size:1.8rem;">🎬</div>
                 <div>
                     <h3>部分RPA定制项目案例</h3>
                     <span class="ver">定制开发的项目案例</span>
@@ -277,4 +277,3 @@
 
 </body>
 </html>
-
