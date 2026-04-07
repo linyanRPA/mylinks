@@ -75,6 +75,7 @@
         .tag-red { background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 4px 10px rgba(185, 28, 28, 0.3); }
 
         /* --- 普通卡片 --- */
+        .card-3-col { grid-column: span 3; }
         .card-2-col { grid-column: span 2; }
         .card-1-col { grid-column: span 1; }
         
@@ -104,7 +105,7 @@
         .btn-secondary { background: #fff; color: #475569; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .btn-secondary:hover { background: #f8fafc; color: #1e1b4b; transform: translateY(-2px); }
 
-        /* 抖音按钮 (修改为抖音红渐变) */
+        /* 抖音按钮 */
         .btn-douyin { background: var(--douyin-gradient); color: #fff; box-shadow: var(--douyin-shadow); border: none; }
         .btn-douyin:hover { filter: brightness(1.1); transform: translateY(-3px); }
 
@@ -130,7 +131,7 @@
         /* 移动端适配 */
         @media (max-width: 900px) {
             .container { display: flex; flex-direction: column; padding: 30px 0; gap: 20px; }
-            .profile-section, .card-2-col, .card-1-col, .glass-card { grid-column: auto; width: 100%; padding: 24px; }
+            .profile-section, .card-3-col, .card-2-col, .card-1-col, .glass-card { grid-column: auto; width: 100%; padding: 24px; }
             .profile-section { flex-direction: column; text-align: center; gap: 15px; }
             .profile-info h1 { font-size: 2.2rem; }
             .tags-container { justify-content: center; }
@@ -203,6 +204,24 @@
             </div>
         </div>
 
+        <div class="glass-card card-3-col">
+            <div class="card-header" style="margin-bottom: 16px;">
+                <div class="icon-box" style="color: #3b82f6;">🛍️</div>
+                <div class="card-title">
+                    <h2>店群RPA自动化运营软件</h2>
+                    <div style="display: flex; gap: 8px; margin-top: 6px;">
+                        <span class="tag-pro" style="margin-top: 0; background: linear-gradient(135deg, #3b82f6, #2563eb);">店群</span>
+                        <span class="tag-pro" style="margin-top: 0; background: linear-gradient(135deg, #10b981, #059669);">自动化</span>
+                    </div>
+                </div>
+            </div>
+            <p class="card-desc" style="max-width: 800px;">
+                专为多店铺矩阵卖家打造的运营利器。支持跨平台多店铺集中管理，实现<span class="highlight">商品批量处理与自动上架</span>等全流程自动化，彻底解放运营双手，规模化提升团队人效。
+            </p>
+            <div class="btn-row" style="max-width: 250px;">
+                <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7625895760688581854?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-download">👉 了解更多</a>
+            </div>
+        </div>
         <div class="glass-card card-2-col">
             <div class="card-header">
                 <div class="icon-box">🤖</div>
