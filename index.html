@@ -59,7 +59,14 @@
             width: 110px; height: 110px; border-radius: 24px; transform: rotate(-3deg); 
             border: 4px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
             object-fit: cover;
+            transition: transform 0.2s;
         }
+        /* 头像悬浮效果 */
+        .avatar-box:hover img {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.3);
+        }
+        
         .profile-info h1 { margin: 0; font-size: 2.8rem; font-weight: 800; color: var(--text-main); background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .profile-info p { font-size: 1.1rem; color: var(--text-sub); margin-top: 10px; font-weight: 500; margin-bottom: 15px; line-height: 1.6; }
 
@@ -71,7 +78,6 @@
         .tag-purple { background: linear-gradient(135deg, #a78bfa, #7c3aed); box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3); }
         .tag-orange { background: linear-gradient(135deg, #fbbf24, #d97706); box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
         .tag-green { background: linear-gradient(135deg, #34d399, #059669); box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); }
-        /* 新增：红色标签 */
         .tag-red { background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 4px 10px rgba(185, 28, 28, 0.3); }
 
         /* --- 普通卡片 --- */
@@ -113,9 +119,11 @@
         .contact-box { grid-column: span 3; padding: 25px; background: rgba(255,255,255,0.7); text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
         .contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: 0.95rem; color: #64748b; }
         
-        .wx-copy-btn { color: #4f46e5; font-weight: 700; cursor: pointer; background: rgba(79, 70, 229, 0.1); padding: 4px 10px; border-radius: 8px; transition: background 0.2s; position: relative; }
+        .wx-copy-btn, .mail-link { cursor: pointer; padding: 4px 10px; border-radius: 8px; font-weight: 700; transition: background 0.2s; text-decoration: none;}
+        .wx-copy-btn { color: #4f46e5; background: rgba(79, 70, 229, 0.1); }
         .wx-copy-btn:hover { background: rgba(79, 70, 229, 0.2); }
-        .mail-link { color: #ea580c; font-weight: 700; text-decoration: none; background: rgba(234, 88, 12, 0.1); padding: 4px 10px; border-radius: 8px; transition: background 0.2s; }
+        
+        .mail-link { color: #ea580c; background: rgba(234, 88, 12, 0.1); }
         .mail-link:hover { background: rgba(234, 88, 12, 0.2); }
 
         /* --- 提示框 --- */
@@ -127,6 +135,20 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15); backdrop-filter: blur(8px);
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 100px; }
+
+        /* --- 星星特效动画 --- */
+        .falling-star {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            animation: fallAndFade 0.8s ease-out forwards;
+        }
+        @keyframes fallAndFade {
+            0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 1; }
+            30% { transform: translate(calc(-50% + var(--dx) * 0.5), calc(-50% - 60px)) scale(1.5) rotate(45deg); opacity: 1; }
+            100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.5) rotate(180deg); opacity: 0; }
+        }
 
         /* 移动端适配 */
         @media (max-width: 900px) {
@@ -154,7 +176,7 @@
     <div class="container">
         
         <div class="glass-card profile-section">
-            <div class="avatar-box">
+            <div class="avatar-box" onclick="triggerStarsAndCopyWx(event)" style="cursor: pointer;" title="点击复制微信">
                 <img src="./avatar.jpg" alt="林焱" onerror="this.src='https://ui-avatars.com/api/?name=Lin+Yan&background=4f46e5&color=fff&size=200&bold=true'">
             </div>
             <div class="profile-info">
@@ -266,7 +288,7 @@
             <p style="margin:0; font-weight:bold; color:#1e1b4b;">✨ 商务合作 / 定制开发</p>
             <div class="contact-row">
                 <span>微信: <span class="wx-copy-btn" onclick="copyWx()">linyan7982020 📋</span></span>
-                <span>邮箱: <a href="mailto:linyan222@foxmail.com" class="mail-link">linyan222@foxmail.com 📧</a></span>
+                <span>邮箱: <span class="mail-link" onclick="copyEmail()">linyan222@foxmail.com 📧</span></span>
             </div>
         </div>
 
@@ -277,17 +299,59 @@
     <script>
         function copyWx() { copyText("linyan7982020", "✅ 微信号已复制！"); }
         function copyEmail() { copyText("linyan222@foxmail.com", "✅ 邮箱已复制！"); }
+        
+        // 修改3：增加头像点击触发星星特效的方法
+        function triggerStarsAndCopyWx(e) {
+            copyWx(); // 复制微信并弹窗提示
+            
+            // 生成8个小星星
+            for (let i = 0; i < 8; i++) {
+                createStar(e.clientX, e.clientY);
+            }
+        }
+
+        // 修改4：生成星星的逻辑
+        function createStar(x, y) {
+            const star = document.createElement("div");
+            // 随机选用星星或闪光 emoji
+            const starEmojis = ["⭐", "✨", "🌟"];
+            star.innerText = starEmojis[Math.floor(Math.random() * starEmojis.length)];
+            star.className = "falling-star";
+            
+            star.style.left = x + "px";
+            star.style.top = y + "px";
+            
+            // 随机设置散开的方向和掉落的深度
+            const dx = (Math.random() - 0.5) * 200; // 横向飞出距离 (-100 到 100)
+            const dy = Math.random() * 150 + 50;    // 纵向掉落距离 (50 到 200)
+            
+            star.style.setProperty('--dx', dx + 'px');
+            star.style.setProperty('--dy', dy + 'px');
+            
+            // 随机大小
+            star.style.fontSize = (Math.random() * 1 + 1) + "rem";
+            
+            document.body.appendChild(star);
+            
+            // 动画播放完毕后移除该元素（0.8秒）
+            setTimeout(() => {
+                star.remove();
+            }, 800);
+        }
+
         function copyText(text, successMsg) {
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => showToast(successMsg)).catch(() => fallbackCopy(text, successMsg));
             } else { fallbackCopy(text, successMsg); }
         }
+        
         function fallbackCopy(text, successMsg) {
             var ta = document.createElement("textarea"); ta.value = text; ta.style.position="fixed"; ta.style.left="-9999px";
             document.body.appendChild(ta); ta.focus(); ta.select();
             try { if(document.execCommand('copy')) showToast(successMsg); else alert("请手动复制："+text); } 
             catch(e){ alert("请手动复制："+text); } document.body.removeChild(ta);
         }
+        
         function showToast(msg) {
             var x = document.getElementById("toast"); x.innerText = msg; x.className = "show";
             setTimeout(() => x.className = x.className.replace("show", ""), 3000);
