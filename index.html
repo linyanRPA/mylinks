@@ -62,7 +62,6 @@
             object-fit: cover;
             transition: transform 0.2s;
         }
-        /* 头像悬浮效果 */
         .avatar-box:hover img {
             transform: rotate(0deg) scale(1.05);
             box-shadow: 0 15px 35px rgba(79, 70, 229, 0.3);
@@ -89,7 +88,7 @@
         .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
         .icon-box { font-size: 2.5rem; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); color: #4f46e5; flex-shrink: 0; }
         .card-title h2 { margin: 0; font-size: 1.5rem; font-weight: 800; color: #1e1b4b; }
-        .card-title h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #1e1b4b; }
+        .card-title h3 { margin: 0; font-size: 1.15rem; font-weight: 700; color: #1e1b4b; }
         
         .tag-pro { display: inline-block; background: linear-gradient(90deg, #f59e0b, #ea580c); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 6px; }
         .ver { font-size: 0.8rem; color: #64748b; background: rgba(255,255,255,0.8); padding: 2px 8px; border-radius: 10px; }
@@ -104,16 +103,16 @@
         
         /* --- 按钮 --- */
         .btn-row { display: flex; gap: 10px; margin-top: auto; }
-        .btn { flex: 1; padding: 12px 0; text-align: center; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+        .btn { flex: 1; padding: 12px 0; text-align: center; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.2s; white-space: nowrap; cursor: pointer; border: none; font-family: inherit; }
         
         .btn-download { background: var(--btn-gradient); color: white; box-shadow: var(--btn-shadow); border: none; }
         .btn-download:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(234, 88, 12, 0.5); }
         
-        .btn-secondary { background: #fff; color: #475569; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .btn-secondary { background: #fff; color: #475569; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: inline-flex; justify-content: center; align-items: center;}
         .btn-secondary:hover { background: #f8fafc; color: #1e1b4b; transform: translateY(-2px); }
 
         /* 抖音按钮 */
-        .btn-douyin { background: var(--douyin-gradient); color: #fff; box-shadow: var(--douyin-shadow); border: none; }
+        .btn-douyin { background: var(--douyin-gradient); color: #fff; box-shadow: var(--douyin-shadow); border: none; display: inline-flex; justify-content: center; align-items: center; }
         .btn-douyin:hover { filter: brightness(1.1); transform: translateY(-3px); }
 
         /* --- 底部联系 --- */
@@ -127,7 +126,7 @@
         .mail-link { color: #ea580c; background: rgba(234, 88, 12, 0.1); }
         .mail-link:hover { background: rgba(234, 88, 12, 0.2); }
 
-        /* --- 提示框 --- */
+        /* --- 弹窗与提示 --- */
         #toast {
             visibility: hidden; min-width: 200px; background-color: rgba(30, 27, 75, 0.9); color: #fff;
             text-align: center; border-radius: 50px; padding: 16px; position: fixed; z-index: 999;
@@ -137,13 +136,45 @@
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 100px; }
 
+        /* 镜像下载节点选择弹窗 */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .download-modal {
+            background: #ffffff; border-radius: 24px; width: 90%; max-width: 420px;
+            padding: 28px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateY(20px) scale(0.95); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-overlay.active .download-modal { transform: translateY(0) scale(1); }
+        
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .modal-header h3 { margin: 0; font-size: 1.3rem; color: #1e1b4b; display: flex; align-items: center; gap: 8px;}
+        .close-btn { background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; cursor: pointer; color: #64748b; transition: 0.2s;}
+        .close-btn:hover { background: #fee2e2; color: #ef4444; transform: rotate(90deg);}
+        
+        .mirror-list { display: flex; flex-direction: column; gap: 10px; max-height: 50vh; overflow-y: auto; padding-right: 5px; margin-top: 20px;}
+        .mirror-list::-webkit-scrollbar { width: 6px; }
+        .mirror-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        
+        .mirror-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 18px; background: #f8fafc; border-radius: 14px;
+            text-decoration: none; color: #334155; font-weight: 600; font-size: 0.95rem;
+            transition: all 0.2s; border: 1px solid #e2e8f0;
+        }
+        .mirror-item.primary { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-color: #bbf7d0; color: #166534; }
+        .mirror-item:hover { background: #eff6ff; border-color: #3b82f6; color: #1d4ed8; transform: translateX(4px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1); }
+        .mirror-item.primary:hover { background: #dcfce7; border-color: #22c55e; color: #15803d;}
+
         /* --- 星星特效动画 --- */
         .falling-star {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            animation: fallAndFade 0.8s ease-out forwards;
+            position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); animation: fallAndFade 0.8s ease-out forwards;
         }
         @keyframes fallAndFade {
             0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 1; }
@@ -193,20 +224,20 @@
             </div>
         </div>
 
-        <div class="glass-card card-2-col">
+        <div class="glass-card card-1-col">
             <div class="card-header">
-                <div class="icon-box">🖼️</div>
-                <div class="card-title">
-                    <h2>Image Translator Pro</h2>
-                    <div><span class="tag-pro">图片批量翻译软件</span></div>
+                <div class="icon-box" style="font-size:2rem; width:56px; height:56px;">🖼️</div>
+                <div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Image Translator Pro</h3>
+                    <span class="tag-pro" style="margin-top:0;">图片批量翻译</span>
                 </div>
             </div>
-            <p class="card-desc">
+            <p class="card-desc" style="font-size: 0.9rem;">
                 跨境电商必备。<span class="highlight">一键批量翻译商品图片</span>，彻底告别低效率办公。
             </p>
             <div class="btn-row">
-                <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7593485077321878713?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary">📖 教程</a>
-                <a href="https://hk.gh-proxy.org/https://github.com/linyanRPA/download-center/releases/download/img-v5.0.4/ImageTransPro_v5.0.4.zip" target="_blank" class="btn btn-download">🔥 立即下载</a>
+                <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7593485077321878713?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary" style="font-size:0.8rem;">📖 教程</a>
+                <button onclick="openDownloadModal('https://github.com/linyanRPA/download-center/releases/download/img-v5.0.4/ImageTransPro_v5.0.4.zip')" class="btn btn-download" style="font-size:0.8rem;">⬇️ 下载</button>
             </div>
         </div>
 
@@ -214,7 +245,7 @@
             <div class="card-header">
                 <div class="icon-box" style="font-size:2rem; width:56px; height:56px;">🏬</div>
                 <div>
-                    <h3>1688商品信息批量采集软件</h3>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 4px;">1688商品采集器</h3>
                     <span class="ver">v5.0.1</span>
                 </div>
             </div>
@@ -223,7 +254,24 @@
             </p>
             <div class="btn-row">
                 <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7602587341106040011?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary" style="font-size:0.8rem;">📖 教程</a>
-                <a href="https://hk.gh-proxy.org/https://github.com/linyanRPA/download-center/releases/download/1688%E7%88%AC%E8%99%AB-5.0.1/1688.5.0.1.zip" target="_blank" class="btn btn-download" style="font-size:0.8rem;">⬇️ 下载</a>
+                <button onclick="openDownloadModal('https://github.com/linyanRPA/download-center/releases/download/1688%E7%88%AC%E8%99%AB-5.0.1/1688.5.0.1.zip')" class="btn btn-download" style="font-size:0.8rem;">⬇️ 下载</button>
+            </div>
+        </div>
+
+        <div class="glass-card card-1-col">
+            <div class="card-header">
+                <div class="icon-box" style="font-size:2rem; width:56px; height:56px; color:#10b981;">🧠</div>
+                <div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 4px;">全平台商品属性AI生成</h3>
+                    <span class="tag-pro" style="background: linear-gradient(135deg, #10b981, #059669); margin-top:0;">AI 赋能</span>
+                </div>
+            </div>
+            <p class="card-desc" style="font-size: 0.9rem;">
+                接入大模型智能分析商品，一键自动生成全平台适用的商品属性，告别手动编造。
+            </p>
+            <div class="btn-row">
+                <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7630048110359169995?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-secondary" style="font-size:0.8rem;">📖 教程</a>
+                <button onclick="openDownloadModal('https://github.com/linyanRPA/download-center/releases/download/AutoFillAttr_Pro1.0/AutoFillAttr_Pro1.0.zip')" class="btn btn-download" style="font-size:0.8rem;">⬇️ 下载</button>
             </div>
         </div>
 
@@ -245,6 +293,7 @@
                 <a href="https://scn0iwhjsleo.feishu.cn/wiki/space/7625895760688581854?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home" target="_blank" class="btn btn-download">👉 了解更多</a>
             </div>
         </div>
+        
         <div class="glass-card card-2-col">
             <div class="card-header">
                 <div class="icon-box">🤖</div>
@@ -297,47 +346,93 @@
 
     <div id="toast">✅ 内容已复制，快去使用吧！</div>
 
+    <div class="modal-overlay" id="downloadModal" onclick="closeModal(event)">
+        <div class="download-modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>🚀 选择下载节点</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <p style="font-size: 0.85rem; color: #64748b; margin-top: 0; margin-bottom: 5px;">国内访问 GitHub 容易失败，建议优先使用极速镜像节点。</p>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 0;">(如果某个节点无响应或报错，关掉换一个即可)</p>
+            
+            <div class="mirror-list" id="mirrorList">
+                </div>
+        </div>
+    </div>
+
     <script>
+        /* =========================================
+           🔧 核心配置区：在这里统一管理你的镜像前缀
+           后续有失效的直接删掉，有新的直接加进来
+        ========================================= */
+        const mirrorPrefixes = [
+            "https://ghproxy.mirror.skybyte.me/",
+            "https://gh.halonice.com/",
+            "https://ghproxy.sakuramoe.dev/",
+            "https://30006000.xyz/",
+            "https://gh.padao.fun/",
+            "https://g.blfrp.cn/",
+            "https://edgeone.gh-proxy.org/"
+        ];
+
+        /* --- 下载弹窗逻辑 --- */
+        function openDownloadModal(githubUrl) {
+            const listContainer = document.getElementById('mirrorList');
+            listContainer.innerHTML = ''; // 清空列表
+
+            // 1. 动态生成代理节点
+            mirrorPrefixes.forEach((prefix, index) => {
+                const finalUrl = prefix + githubUrl;
+                listContainer.innerHTML += `
+                    <a href="${finalUrl}" target="_blank" class="mirror-item">
+                        <span>⚡ 极速下载节点 ${index + 1}</span>
+                        <span>下载 &rarr;</span>
+                    </a>
+                `;
+            });
+
+            // 2. 将原生 GitHub 链接作为保底放在最后
+            listContainer.innerHTML += `
+                <a href="${githubUrl}" target="_blank" class="mirror-item primary" style="margin-top: 8px;">
+                    <span>🐙 GitHub 原生直链 (需挂梯子)</span>
+                    <span>下载 &rarr;</span>
+                </a>
+            `;
+
+            // 打开弹窗
+            document.getElementById('downloadModal').classList.add('active');
+        }
+
+        function closeModal(e) {
+            if (e && e.target !== document.getElementById('downloadModal') && e.type === 'click') return;
+            document.getElementById('downloadModal').classList.remove('active');
+        }
+
+        /* --- 复制与特效逻辑 --- */
         function copyWx() { copyText("linyan7982020", "✅ 微信号已复制！"); }
         function copyEmail() { copyText("linyan222@foxmail.com", "✅ 邮箱已复制！"); }
         
-        // 修改3：增加头像点击触发星星特效的方法
         function triggerStarsAndCopyWx(e) {
-            copyWx(); // 复制微信并弹窗提示
-            
-            // 生成8个小星星
-            for (let i = 0; i < 8; i++) {
-                createStar(e.clientX, e.clientY);
-            }
+            copyWx();
+            for (let i = 0; i < 8; i++) { createStar(e.clientX, e.clientY); }
         }
 
-        // 修改4：生成星星的逻辑
         function createStar(x, y) {
             const star = document.createElement("div");
-            // 随机选用星星或闪光 emoji
             const starEmojis = ["⭐", "✨", "🌟"];
             star.innerText = starEmojis[Math.floor(Math.random() * starEmojis.length)];
             star.className = "falling-star";
+            star.style.left = x + "px"; star.style.top = y + "px";
             
-            star.style.left = x + "px";
-            star.style.top = y + "px";
-            
-            // 随机设置散开的方向和掉落的深度
-            const dx = (Math.random() - 0.5) * 200; // 横向飞出距离 (-100 到 100)
-            const dy = Math.random() * 150 + 50;    // 纵向掉落距离 (50 到 200)
+            const dx = (Math.random() - 0.5) * 200; 
+            const dy = Math.random() * 150 + 50;    
             
             star.style.setProperty('--dx', dx + 'px');
             star.style.setProperty('--dy', dy + 'px');
-            
-            // 随机大小
             star.style.fontSize = (Math.random() * 1 + 1) + "rem";
             
             document.body.appendChild(star);
-            
-            // 动画播放完毕后移除该元素（0.8秒）
-            setTimeout(() => {
-                star.remove();
-            }, 800);
+            setTimeout(() => { star.remove(); }, 800);
         }
 
         function copyText(text, successMsg) {
